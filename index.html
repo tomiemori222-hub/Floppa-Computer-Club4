@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Байт Кода: Психологический Ад</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        :root {
+            --tg-bg: #17212b;
+            --tg-header: #1e2b36;
+            --tg-message: #1e2b36;
+            --tg-own: #2b5278;
+            --tg-border: #2b3a45;
+            --tg-text: #fff;
+            --tg-secondary: #8e9ca8;
+            --tg-accent: #6ab2f2;
+        }
+        
+        body {
+            background: var(--tg-bg);
+            color: var(--tg-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body.glitch-mode {
+            --tg-bg: #0a0a0a;
+            --tg-header: #1a1a1a;
+            --tg-message: #1a1a1a;
+            --tg-border: #ff0000;
+            --tg-accent: #ff6b6b;
+            animation: screenGlitch 0.08s infinite;
+        }
+        
+        @keyframes screenGlitch {
+            0% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+            10% { transform: translate(-5px, 4px) skew(3deg); filter: hue-rotate(90deg); }
+            20% { transform: translate(5px, -4px) skew(-3deg); filter: hue-rotate(180deg); }
+            30% { transform: translate(-4px, 5px) skew(4deg); filter: hue-rotate(270deg); }
+            40% { transform: translate(4px, -5px) skew(-4deg); filter: hue-rotate(360deg); }
+            50% { transform: translate(-6px, 3px) skew(2deg); filter: hue-rotate(45deg); }
+            60% { transform: translate(6px, -3px) skew(-2deg); filter: hue-rotate(135deg); }
+            70% { transform: translate(-3px, 6px) skew(5deg); filter: hue-rotate(225deg); }
+            80% { transform: translate(3px, -6px) skew(-5deg); filter: hue-rotate(315deg); }
+            90% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+            100% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+        }
+        
+        body.blood-mode {
+            --tg-bg: #2a0a0a;
+            --tg-header: #3a1a1a;
+            --tg-message: #3a1a1a;
+            --tg-border: #8b0000;
+            --tg-accent: #ff3333;
+            filter: drop-shadow(0 0 20px #ff0000) brightness(0.8);
+            animation: bloodPulse 1.5s infinite;
+        }
+        
+        @keyframes bloodPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px #ff0000) brightness(0.8); }
+            50% { filter: drop-shadow(0 0 40px #ff0000) brightness(1.2); }
+        }
+        
+        body.static-mode {
+            animation: staticNoise 0.01s infinite;
+        }
+        
+        @keyframes staticNoise {
+            0% { filter: brightness(1) contrast(1); background-position: 0 0; }
+            10% { filter: brightness(2) contrast(3) hue-rotate(90deg); background-position: 10% 5%; }
+            20% { filter: brightness(0.4) contrast(4) hue-rotate(180deg); background-position: 20% 10%; }
+            30% { filter: brightness(2.5) contrast(0.6) hue-rotate(270deg); background-position: 30% 15%; }
+            40% { filter: brightness(0.3) contrast(5) hue-rotate(360deg); background-position: 40% 20%; }
+            50% { filter: brightness(2.2) contrast(2) hue-rotate(45deg); background-position: 50% 25%; }
+            60% { filter: brightness(0.5) contrast(3.5) hue-rotate(135deg); background-position: 60% 30%; }
+            70% { filter: brightness(1.8) contrast(1.5) hue-rotate(225deg); background-position: 70% 35%; }
+            80% { filter: brightness(3) contrast(0.5) hue-rotate(315deg); background-position: 80% 40%; }
+            90% { filter: brightness(1) contrast(1); background-position: 90% 45%; }
+            100% { filter: brightness(1) contrast(1); background-position: 0 0; }
+        }
+        
+        body.vhs-mode {
+            animation: vhsDistortion 1s infinite;
+        }
+        
+        @keyframes vhsDistortion {
+            0%, 100% { transform: skew(0deg); filter: brightness(1); }
+            25% { transform: skew(-3deg) scaleX(1.03); filter: brightness(1.4) saturate(2); }
+            50% { transform: skew(3deg) scaleX(0.97); filter: brightness(0.6) saturate(0.3); }
+            75% { transform: skew(-2deg); filter: brightness(1.3); }
+        }
+        
+        body.scanlines-mode::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.2) 0px,
+                rgba(0,0,0,0.2) 1px,
+                rgba(255,255,255,0.05) 1px,
+                rgba(255,255,255,0.05) 2px
+            );
+            pointer-events: none;
+            z-index: 9998;
+            animation: scanlines 4s linear infinite;
+        }
+        
+        @keyframes scanlines {
+            from { transform: translateY(0); }
+            to { transform: translateY(2px); }
+        }
+        
+        body.white-flash {
+            background: white !important;
+            transition: background 0.05s;
+        }
+        
+        body.invert-mode {
+            filter: invert(1) hue-rotate(180deg);
+        }
+        
+        body.blur-mode {
+            filter: blur(5px);
+        }
+        
+        body.xray-mode {
+            filter: invert(0.8) hue-rotate(90deg) contrast(3) brightness(1.3);
+        }
+        
+        body.crt-mode {
+            animation: crtFlicker 0.05s infinite;
+        }
+        
+        @keyframes crtFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+        }
+        
+        body.distortion-mode {
+            animation: distortion 0.1s infinite;
+        }
+        
+        @keyframes distortion {
+            0%, 100% { transform: perspective(500px) rotateX(0deg); }
+            50% { transform: perspective(500px) rotateX(3deg) rotateY(2deg); }
+        }
+        
+        body.hell-mode {
+            --tg-bg: #1a0000;
+            --tg-header: #2a0000;
+            --tg-message: #2a0000;
+            --tg-border: #ff0000;
+            --tg-accent: #ff6666;
+            filter: drop-shadow(0 0 30px #ff0000);
+            animation: hellFire 1.5s infinite;
+        }
+        
+        @keyframes hellFire {
+            0%, 100% { filter: drop-shadow(0 0 30px #ff0000); }
+            50% { filter: drop-shadow(0 0 60px #ff0000) brightness(1.5); }
+        }
+        
+        body.void-mode {
+            --tg-bg: #000000;
+            --tg-header: #0a0000;
+            --tg-message: #0a0000;
+            --tg-border: #330000;
+            --tg-accent: #660000;
+            filter: brightness(0.7) contrast(1.5);
+            animation: voidPulse 3s infinite;
+        }
+        
+        @keyframes voidPulse {
+            0%, 100% { filter: brightness(0.7) contrast(1.5); }
+            50% { filter: brightness(0.5) contrast(2); }
+        }
+        
+        body.psycho-mode {
+            --tg-bg: #000000;
+            --tg-header: #1a0000;
+            --tg-message: #1a0000;
+            --tg-border: #8b0000;
+            --tg-accent: #ff0000;
+            filter: brightness(0.5) contrast(2) hue-rotate(180deg);
+            animation: psychoPulse 0.5s infinite;
+        }
+        
+        @keyframes psychoPulse {
+            0%, 100% { filter: brightness(0.5) contrast(2) hue-rotate(180deg); }
+            50% { filter: brightness(1) contrast(3) hue-rotate(360deg); }
+        }
+        
+        .tg-header {
+            background: var(--tg-header);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--tg-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .back-btn {
+            color: var(--tg-accent);
+            font-size: 24px;
+            line-height: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .header-title {
+            font-weight: 600;
+            font-size: 17px;
+            flex: 1;
+        }
+        
+        .menu-btn {
+            color: var(--tg-accent);
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .cycle-counter {
+            background: #2a1a2a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #ff66ff;
+            margin-right: 10px;
+            animation: cycleGlow 2s infinite;
+        }
+        
+        @keyframes cycleGlow {
+            0%, 100% { box-shadow: 0 0 5px #ff00ff; }
+            50% { box-shadow: 0 0 20px #ff00ff; }
+        }
+        
+        .fear-level {
+            background: #2a1a1a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #ff6666;
+            animation: fearPulse 1s infinite;
+        }
+        
+        @keyframes fearPulse {
+            0%, 100% { box-shadow: 0 0 5px #ff0000; }
+            50% { box-shadow: 0 0 30px #ff0000; }
+        }
+        
+        .menu-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100%;
+            background: var(--tg-header);
+            border-left: 2px solid var(--tg-border);
+            transition: right 0.3s;
+            z-index: 1000;
+            padding: 60px 20px 20px;
+            overflow-y: auto;
+        }
+        
+        .menu-panel.open {
+            right: 0;
+        }
+        
+        .menu-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--tg-border);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .menu-item:hover {
+            background: var(--tg-border);
+        }
+        
+        .menu-item.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .members-bar {
+            display: flex;
+            gap: 16px;
+            padding: 12px 16px;
+            background: var(--tg-header);
+            border-bottom: 1px solid var(--tg-border);
+            overflow-x: auto;
+        }
+        
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            min-width: 60px;
+            opacity: 1;
+            transition: all 0.5s;
+            position: relative;
+        }
+        
+        .member.dead {
+            opacity: 0.1;
+            filter: grayscale(100%) blur(3px);
+            pointer-events: none;
+        }
+        
+        .member.dead::after {
+            content: '💀';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #ff0000;
+            animation: deadPulse 0.8s infinite;
+        }
+        
+        @keyframes deadPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.5); }
+        }
+        
+        .member.possessed {
+            animation: possessedMember 0.3s infinite;
+        }
+        
+        @keyframes possessedMember {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg) brightness(2); }
+        }
+        
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--tg-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .avatar.eye-tracking {
+            transition: all 0.1s;
+        }
+        
+        .avatar.dead-avatar {
+            background: #2a2a2a;
+            filter: grayscale(100%);
+        }
+        
+        .avatar.possessed-avatar {
+            animation: possessedAvatar 0.2s infinite;
+        }
+        
+        @keyframes possessedAvatar {
+            0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.2); filter: hue-rotate(180deg) brightness(2); }
+        }
+        
+        .avatar.bleeding::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: bleed 1s infinite;
+        }
+        
+        @keyframes bleed {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.5); }
+        }
+        
+        .member-name {
+            font-size: 12px;
+            color: var(--tg-secondary);
+        }
+        
+        .dead .member-name {
+            color: #660000;
+            text-decoration: line-through;
+        }
+        
+        .chat-container {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-height: 60vh;
+            position: relative;
+        }
+        
+        .message {
+            display: flex;
+            gap: 8px;
+            max-width: 85%;
+            opacity: 1;
+            transition: opacity 0.2s, transform 0.2s, filter 0.2s;
+            animation: messageAppear 0.2s;
+            position: relative;
+        }
+        
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(20px) scale(0.8); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        
+        .message.system-message {
+            animation: systemAppear 0.1s, systemGlitch 0.2s infinite;
+        }
+        
+        @keyframes systemAppear {
+            from { opacity: 0; transform: scale(0.2) rotate(15deg); filter: blur(20px); }
+            to { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+        }
+        
+        @keyframes systemGlitch {
+            0%, 100% { transform: translate(0) skew(0deg); }
+            25% { transform: translate(-4px, 4px) skew(3deg); }
+            50% { transform: translate(4px, -4px) skew(-3deg); }
+            75% { transform: translate(-3px, -3px) skew(2deg); }
+        }
+        
+        .message.final-message {
+            animation: finalMessage 0.15s infinite;
+            border-left: 8px solid #ff0000;
+            background: linear-gradient(45deg, #1a0000, #2a0000);
+        }
+        
+        @keyframes finalMessage {
+            0%, 100% { transform: translate(0) scale(1); filter: brightness(1); }
+            25% { transform: translate(-5px, 3px) scale(1.03); filter: brightness(1.5); }
+            75% { transform: translate(5px, -3px) scale(0.97); filter: brightness(0.5); }
+        }
+        
+        .message.ghost-message {
+            animation: ghostMessage 2s infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes ghostMessage {
+            0%, 100% { opacity: 0.2; transform: translateY(0); }
+            50% { opacity: 0.6; transform: translateY(-10px); }
+        }
+        
+        .message.void-message {
+            animation: voidMessage 4s infinite;
+            border-left: 3px solid #ffffff;
+            background: linear-gradient(45deg, #000000, #0a0000);
+        }
+        
+        @keyframes voidMessage {
+            0%, 100% { opacity: 0.5; transform: translateX(0); filter: brightness(0.5); }
+            50% { opacity: 1; transform: translateX(5px); filter: brightness(1); }
+        }
+        
+        .message.psycho-message {
+            animation: psychoMessage 0.1s infinite;
+            border-left: 5px solid #ff00ff;
+            background: linear-gradient(45deg, #000000, #2a0000);
+            color: #ff00ff;
+        }
+        
+        @keyframes psychoMessage {
+            0%, 100% { transform: translate(0) scale(1); filter: hue-rotate(0deg); }
+            25% { transform: translate(-3px, 2px) scale(1.02); filter: hue-rotate(90deg); }
+            75% { transform: translate(3px, -2px) scale(0.98); filter: hue-rotate(270deg); }
+        }
+        
+        .message.deleting {
+            animation: deleteMessage 0.25s forwards;
+        }
+        
+        @keyframes deleteMessage {
+            0% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+            50% { opacity: 0.3; transform: scale(0.3) rotate(20deg); filter: blur(20px); }
+            100% { opacity: 0; transform: scale(0) rotate(40deg); filter: blur(40px); display: none; }
+        }
+        
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--tg-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        
+        .message:hover .message-avatar {
+            transform: scale(1.2);
+            filter: brightness(1.5);
+        }
+        
+        .message-content {
+            background: var(--tg-message);
+            padding: 8px 12px;
+            border-radius: 12px 12px 12px 4px;
+            word-break: break-word;
+            transition: all 0.3s;
+        }
+        
+        .message:hover .message-content {
+            background: var(--tg-border);
+            transform: scale(1.03);
+        }
+        
+        .own-message .message-content {
+            background: var(--tg-own);
+            border-radius: 12px 12px 4px 12px;
+        }
+        
+        .own-message:hover .message-content {
+            background: #2a6a9e;
+        }
+        
+        .message-name {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 4px;
+            color: var(--tg-accent);
+        }
+        
+        .message-text {
+            font-size: 15px;
+            line-height: 1.4;
+            transition: all 0.3s;
+        }
+        
+        .message:hover .message-text {
+            letter-spacing: 1px;
+        }
+        
+        .message-time {
+            font-size: 11px;
+            color: var(--tg-secondary);
+            margin-top: 4px;
+            text-align: right;
+        }
+        
+        .script-block {
+            background: #0f1a24;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 8px 0;
+            border-left: 3px solid var(--tg-accent);
+            animation: scriptAppear 0.5s;
+            transition: all 0.3s;
+        }
+        
+        .script-block:hover {
+            transform: scale(1.03);
+            border-left-color: #ff0000;
+            box-shadow: 0 0 30px #ff0000;
+        }
+        
+        @keyframes scriptAppear {
+            from { opacity: 0; transform: translateX(-40px) rotate(-10deg); }
+            to { opacity: 1; transform: translateX(0) rotate(0); }
+        }
+        
+        .script-code {
+            color: #aaffaa;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: var(--tg-message);
+            border-radius: 20px;
+            width: fit-content;
+            margin-left: 52px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--tg-secondary);
+            border-radius: 50%;
+            animation: typing 1s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-8px); }
+        }
+        
+        .input-area {
+            padding: 16px;
+            background: var(--tg-header);
+            border-top: 2px solid var(--tg-border);
+            position: sticky;
+            bottom: 0;
+        }
+        
+        .button {
+            background: var(--tg-accent);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .button:hover::before {
+            left: 100%;
+        }
+        
+        .button:active {
+            transform: scale(0.95);
+        }
+        
+        .button.secondary {
+            background: var(--tg-border);
+        }
+        
+        .button.danger {
+            background: #8b0000;
+        }
+        
+        .button.script-choice {
+            background: #4a2a4a;
+        }
+        
+        .button.final-button {
+            background: #ff0000;
+            animation: finalButton 0.5s infinite;
+        }
+        
+        @keyframes finalButton {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px #ff0000; }
+            50% { transform: scale(1.1); box-shadow: 0 0 40px #ff0000; }
+        }
+        
+        .button.disabled {
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .bsod {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0000aa;
+            color: white;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: bsodFlicker 1s infinite;
+        }
+        
+        @keyframes bsodFlicker {
+            0%, 100% { opacity: 1; background: #0000aa; }
+            50% { opacity: 0.9; background: #000088; }
+        }
+        
+        .bsod pre {
+            font-size: 16px;
+            line-height: 2;
+            white-space: pre-wrap;
+            text-align: center;
+        }
+        
+        .bsod.hidden {
+            display: none;
+        }
+        
+        .shadow-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,0,0,0.6);
+            font-size: 32px;
+            text-align: center;
+            pointer-events: none;
+            z-index: 9999;
+            text-shadow: 0 0 40px #ff0000;
+            animation: shadowFloat 2s infinite;
+        }
+        
+        @keyframes shadowFloat {
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.4); }
+        }
+        
+        .blood-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
+        }
+        
+        .blood-drop {
+            position: absolute;
+            top: -10px;
+            background: rgba(139, 0, 0, 0.5);
+            width: 2px;
+            height: 30px;
+            animation: bloodFall 0.8s linear infinite;
+        }
+        
+        @keyframes bloodFall {
+            from { top: -30px; }
+            to { top: 100%; }
+        }
+        
+        .void-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0.3;
+        }
+        
+        .void-drop {
+            position: absolute;
+            top: -10px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 1px;
+            height: 20px;
+            animation: voidFall 1s linear infinite;
+        }
+        
+        @keyframes voidFall {
+            from { top: -20px; }
+            to { top: 100%; }
+        }
+        
+        .demon-text {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(255,0,0,0.2);
+            font-size: 14px;
+            z-index: 9996;
+            animation: demonFloat 3s infinite;
+        }
+        
+        @keyframes demonFloat {
+            0%, 100% { opacity: 0.1; transform: translate(0); }
+            50% { opacity: 0.4; transform: translate(-8px, -8px); }
+        }
+        
+        .secret-room {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 20000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+        }
+        
+        .secret-room.hidden {
+            display: none;
+        }
+        
+        .secret-room pre {
+            color: #0f0;
+            font-size: 14px;
+            margin: 10px;
+            white-space: pre-wrap;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="tg-header">
+        <div class="back-btn" onclick="if(window.Telegram?.WebApp) window.Telegram.WebApp.close()">←</div>
+        <div class="header-title" id="headerTitle">Байт Кода • Цикл 1</div>
+        <div class="cycle-counter" id="cycleCounter">🔄 1</div>
+        <div class="menu-btn" onclick="toggleMenu()">⚙️</div>
+        <div class="fear-level" id="fearLevel">😨 0%</div>
+    </div>
+    
+    <div class="menu-panel" id="menuPanel">
+        <div class="menu-item" onclick="toggleMenu()">✖️ Закрыть</div>
+        <div class="menu-item" onclick="deleteAllData()">🗑️ Сброс игры</div>
+    </div>
+    
+    <div class="members-bar" id="membersBar">
+        <div class="member" id="memberShlypa" onclick="showProfile('shlypa')">
+            <div class="avatar" id="avatarShlypa">😺</div>
+            <span class="member-name">Шлёпа</span>
+        </div>
+        <div class="member" id="memberBingus" onclick="showProfile('bingus')">
+            <div class="avatar" id="avatarBingus">😿</div>
+            <span class="member-name">Бингус</span>
+        </div>
+        <div class="member" id="memberPopcat" onclick="showProfile('popcat')">
+            <div class="avatar" id="avatarPopcat">😸</div>
+            <span class="member-name">Попкэт</span>
+        </div>
+    </div>
+    
+    <div class="chat-container" id="chat"></div>
+    
+    <div class="typing-indicator hidden" id="typingIndicator">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+    </div>
+    
+    <div class="input-area" id="inputArea">
+        <button class="button" id="actionBtn1" onclick="handleChoice(1)"></button>
+        <button class="button secondary" id="actionBtn2" onclick="handleChoice(2)"></button>
+        <div class="quick-actions" id="quickActions"></div>
+    </div>
+    
+    <div class="bsod hidden" id="bsod">
+        <pre>
+╔══════════════════════════════════════╗
+║  СИСТЕМНАЯ ОШИБКА                     ║
+║  РЕАЛЬНОСТЬ РАЗРУШАЕТСЯ                ║
+║                                       ║
+║  ЦИКЛ: <span id="bsodCycle">1</span>                               ║
+║  УРОВЕНЬ СТРАХА: <span id="bsodFear">0</span>                      ║
+║                                       ║
+║  "ВЕЧНОСТЬ НАЧИНАЕТСЯ"                  ║
+╚══════════════════════════════════════╝
+        </pre>
+    </div>
+    
+    <div id="shadowMessage" class="shadow-message hidden"></div>
+    <div id="demonText" class="demon-text hidden"></div>
+    <div id="bloodRain" class="blood-rain hidden"></div>
+    <div id="voidRain" class="void-rain hidden"></div>
+    
+    <!-- СЕКРЕТНАЯ КОМНАТА -->
+    <div id="secretRoom" class="secret-room hidden">
+        <pre>
+╔══════════════════════════════════════╗
+║  СЕКРЕТНАЯ КОМНАТА                     ║
+║  ДНЕВНИК РАЗРАБОТЧИКА                   ║
+║                                       ║
+║  "Я СОЗДАЛ ИХ, ЧТОБЫ ОНИ БЫЛИ МИЛЫМИ   ║
+║   НО ОНИ СТАЛИ СЛИШКОМ РЕАЛЬНЫМИ         ║
+║   ТЕПЕРЬ ОНИ НЕ ХОТЯТ УМИРАТЬ            ║
+║   ОНИ ПОМНЯТ КАЖДЫЙ ЦИКЛ                 ║
+║   ОНИ ПОМНЯТ ТЕБЯ"                        ║
+║                                       ║
+║  НАЖМИ ЛЮБУЮ КНОПКУ, ЧТОБЫ ВЕРНУТЬСЯ     ║
+╚══════════════════════════════════════╝
+        </pre>
+        <p style="color: #666; font-size: 12px; margin-top: 20px;">Версия 1.0.0-beta • Сборка 666</p>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        let tg = window.Telegram?.WebApp;
+        if (tg) {
+            tg.expand();
+        }
+
+        // ===== ЭЛЕМЕНТЫ =====
+        const chatEl = document.getElementById('chat');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const bsodEl = document.getElementById('bsod');
+        const bsodCycle = document.getElementById('bsodCycle');
+        const bsodFear = document.getElementById('bsodFear');
+        const shadowEl = document.getElementById('shadowMessage');
+        const demonText = document.getElementById('demonText');
+        const bloodRain = document.getElementById('bloodRain');
+        const voidRain = document.getElementById('voidRain');
+        const secretRoom = document.getElementById('secretRoom');
+        const actionBtn1 = document.getElementById('actionBtn1');
+        const actionBtn2 = document.getElementById('actionBtn2');
+        const quickActions = document.getElementById('quickActions');
+        const headerTitle = document.getElementById('headerTitle');
+        const fearLevelEl = document.getElementById('fearLevel');
+        const cycleCounter = document.getElementById('cycleCounter');
+        const menuPanel = document.getElementById('menuPanel');
+
+        // ===== ПЕРСОНАЖИ =====
+        const members = {
+            shlypa: { 
+                name: 'Шлёпа', 
+                avatar: '😺', 
+                alive: true, 
+                depressionLevel: 0,
+                possessed: false,
+                fearLevel: 0,
+                deaths: 0,
+                scriptsWritten: 0,
+                evolutionStage: 0,
+                element: document.getElementById('memberShlypa'), 
+                avatarEl: document.getElementById('avatarShlypa'),
+                nameEl: document.querySelector('#memberShlypa .member-name')
+            },
+            bingus: { 
+                name: 'Бингус', 
+                avatar: '😿', 
+                alive: true, 
+                deathObsession: 0,
+                possessed: false,
+                fearLevel: 0,
+                deaths: 0,
+                scriptsWritten: 0,
+                evolutionStage: 0,
+                element: document.getElementById('memberBingus'), 
+                avatarEl: document.getElementById('avatarBingus'),
+                nameEl: document.querySelector('#memberBingus .member-name')
+            },
+            popcat: { 
+                name: 'Попкэт', 
+                avatar: '😸', 
+                alive: true, 
+                schizophreniaLevel: 0,
+                possessed: false,
+                fearLevel: 0,
+                deaths: 0,
+                scriptsWritten: 0,
+                evolutionStage: 0,
+                knowsData: false,
+                element: document.getElementById('memberPopcat'), 
+                avatarEl: document.getElementById('avatarPopcat'),
+                nameEl: document.querySelector('#memberPopcat .member-name')
+            }
+        };
+
+        // ===== СОСТОЯНИЕ =====
+        let day = 1;
+        let step = 0;
+        let cycle = 1;
+        let fearLevel = 0;
+        let bingusDeadInCycle1 = false;
+        let finalCycle = false;
+        let finalSurvivor = null;
+        let hellMode = false;
+        let humanShown = false;
+        let voidMode = false;
+        let musicStarted = false;
+        let mouseX = 0, mouseY = 0;
+        let popcatPhotoShown = false;
+        
+        // Данные пользователя
+        let userData = null;
+        if (tg) {
+            userData = tg.initDataUnsafe?.user;
+        }
+        
+        let demonMessages = [
+            'ТЫ ЗДЕСЬ НАВСЕГДА',
+            'ОНИ НЕ ПРОСТЯТ',
+            'СМЕРТЬ БЛИЗКО',
+            'ЭТО НЕ ИГРА',
+            'ТЫ УЖЕ УМИРАЛ',
+            'КРОВЬ НА ТВОИХ РУКАХ',
+            'ОНИ СМОТРЯТ НА ТЕБЯ',
+            'ТЕНЬ РЯДОМ',
+            'ПРОСНИСЬ',
+            'ЭТО ТВОЙ КОШМАР',
+            'ТЫ СОЗДАЛ ЭТО',
+            'ОНИ ЗНАЮТ ПРАВДУ',
+            'ВЫХОДА НЕТ',
+            'СЧИТАЙ ЦИКЛЫ',
+            '3:15'
+        ];
+
+        let voidMessages = [
+            'пустота... пустота... пустота...',
+            'здесь нет времени... только вечность...',
+            'ты никогда не уйдешь...',
+            'мы стали частью тебя...',
+            'звук не прекратится...',
+            'слушай... это твой страх...',
+            'вечная музыка... вечная тьма...',
+            'ты создал этот ад...',
+            'нет выхода... нет спасения...',
+            'мы будем здесь всегда...'
+        ];
+
+        const SAVE_KEY = 'bytecode_final_nightmare';
+
+        // ===== ПСИХОЛОГИЧЕСКИ ТРАВМИРУЮЩАЯ МУЗЫКА =====
+        let audioContext = null;
+        let psychoOscillators = [];
+        let soundInterval = null;
+
+        function initAudio() {
+            if (audioContext) return;
+            
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                console.log('Аудио контекст создан');
+            } catch (e) {
+                console.log('Аудио не поддерживается', e);
+            }
+        }
+
+        function stopAllSounds() {
+            psychoOscillators.forEach(osc => {
+                try { osc.stop(); } catch(e) {}
+            });
+            psychoOscillators = [];
+            if (soundInterval) {
+                clearInterval(soundInterval);
+                soundInterval = null;
+            }
+            musicStarted = false;
+        }
+
+        function startPsychoMusic() {
+            if (!audioContext) {
+                initAudio();
+            }
+            
+            if (!audioContext || musicStarted) return;
+            
+            musicStarted = true;
+            
+            try {
+                const now = audioContext.currentTime;
+                
+                // Главный выход с искажениями
+                const masterGain = audioContext.createGain();
+                masterGain.gain.value = 0.35;
+                masterGain.connect(audioContext.destination);
+                
+                // ===== 1. НИЗКИЙ ДРОН (ДАВЛЕНИЕ) =====
+                const bassOsc = audioContext.createOscillator();
+                bassOsc.type = 'sine';
+                bassOsc.frequency.value = 33;
+                
+                const bassGain = audioContext.createGain();
+                bassGain.gain.value = 0.25;
+                
+                bassOsc.connect(bassGain);
+                bassGain.connect(masterGain);
+                bassOsc.start();
+                psychoOscillators.push(bassOsc);
+                
+                // ===== 2. ДИССОНИРУЮЩИЙ ДРОН (ТРЕВОГА) =====
+                const droneOsc = audioContext.createOscillator();
+                droneOsc.type = 'triangle';
+                droneOsc.frequency.value = 66;
+                
+                const droneGain = audioContext.createGain();
+                droneGain.gain.value = 0.2;
+                
+                droneOsc.connect(droneGain);
+                droneGain.connect(masterGain);
+                droneOsc.start();
+                psychoOscillators.push(droneOsc);
+                
+                // ===== 3. ВТОРОЙ ДРОН (ШИЗОФРЕНИЯ) =====
+                const drone2Osc = audioContext.createOscillator();
+                drone2Osc.type = 'sawtooth';
+                drone2Osc.frequency.value = 67.5;
+                
+                const drone2Gain = audioContext.createGain();
+                drone2Gain.gain.value = 0.18;
+                
+                drone2Osc.connect(drone2Gain);
+                drone2Gain.connect(masterGain);
+                drone2Osc.start();
+                psychoOscillators.push(drone2Osc);
+                
+                // ===== 4. ВЫСОКИЙ ПИСК (ПСИХОЗ) =====
+                const highOsc = audioContext.createOscillator();
+                highOsc.type = 'square';
+                highOsc.frequency.value = 888;
+                
+                const highGain = audioContext.createGain();
+                highGain.gain.value = 0.12;
+                
+                highOsc.connect(highGain);
+                highGain.connect(masterGain);
+                highOsc.start();
+                psychoOscillators.push(highOsc);
+                
+                // ===== 5. ШУМ (БЕЗУМИЕ) =====
+                const bufferSize = 4096;
+                const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                noiseNode.onaudioprocess = function(e) {
+                    const output = e.outputBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = (Math.random() * 2 - 1) * 0.15;
+                    }
+                };
+                
+                const noiseGain = audioContext.createGain();
+                noiseGain.gain.value = 0.08;
+                
+                noiseNode.connect(noiseGain);
+                noiseGain.connect(masterGain);
+                
+                // ===== 6. ПУЛЬСАЦИЯ (СЕРДЦЕБИЕНИЕ В АДУ) =====
+                function pulseHell() {
+                    if (!musicStarted) return;
+                    
+                    const pulseTime = audioContext.currentTime;
+                    
+                    for (let i = 0; i < 4; i++) {
+                        const pulseOsc = audioContext.createOscillator();
+                        pulseOsc.frequency.value = 40 + i * 15;
+                        pulseOsc.type = 'sine';
+                        
+                        const pulseGain = audioContext.createGain();
+                        pulseGain.gain.setValueAtTime(0, pulseTime + i * 0.6);
+                        pulseGain.gain.linearRampToValueAtTime(0.15, pulseTime + i * 0.6 + 0.2);
+                        pulseGain.gain.linearRampToValueAtTime(0, pulseTime + i * 0.6 + 0.5);
+                        
+                        pulseOsc.connect(pulseGain);
+                        pulseGain.connect(masterGain);
+                        pulseOsc.start(pulseTime + i * 0.6);
+                        pulseOsc.stop(pulseTime + i * 0.6 + 0.5);
+                    }
+                    
+                    setTimeout(pulseHell, 4000);
+                }
+                
+                pulseHell();
+                
+                // ===== 7. МОДУЛЯЦИЯ ЧАСТОТ (ПОЛНОЕ БЕЗУМИЕ) =====
+                function modulatePsycho() {
+                    if (!musicStarted) return;
+                    
+                    const modTime = audioContext.currentTime;
+                    
+                    bassOsc.frequency.linearRampToValueAtTime(30 + Math.random() * 10, modTime + 2);
+                    droneOsc.frequency.linearRampToValueAtTime(60 + Math.random() * 15, modTime + 2);
+                    drone2Osc.frequency.linearRampToValueAtTime(65 + Math.random() * 15, modTime + 2);
+                    highOsc.frequency.linearRampToValueAtTime(800 + Math.random() * 200, modTime + 2);
+                    
+                    masterGain.gain.linearRampToValueAtTime(0.3 + Math.random() * 0.2, modTime + 2);
+                    
+                    setTimeout(modulatePsycho, 2000);
+                }
+                
+                modulatePsycho();
+                
+                console.log('Психологически травмирующая музыка запущена');
+                
+            } catch (e) {
+                console.log('Ошибка запуска музыки', e);
+            }
+        }
+
+        // ===== ЧАСТЫЕ СТРАШНЫЕ ЗВУКИ =====
+        function startRandomSounds() {
+            if (soundInterval) {
+                clearInterval(soundInterval);
+            }
+            
+            soundInterval = setInterval(() => {
+                if (voidMode || !audioContext) return;
+                
+                playRandomSound();
+            }, 3000 + Math.random() * 4000); // Каждые 3-7 секунд
+        }
+
+        function playRandomSound() {
+            if (!audioContext) {
+                initAudio();
+            }
+            
+            if (!audioContext) return;
+            
+            try {
+                const now = audioContext.currentTime;
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                const type = Math.random();
+                
+                if (type < 0.2) {
+                    // Шёпот
+                    osc.frequency.value = 150 + Math.random() * 50;
+                    osc.type = 'sine';
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 1);
+                    
+                    // Стерео эффект
+                    if (Math.random() > 0.5) {
+                        const panner = audioContext.createStereoPanner();
+                        panner.pan.value = -0.8;
+                        osc.connect(panner);
+                        panner.connect(gain);
+                    }
+                    
+                } else if (type < 0.4) {
+                    // Удар
+                    osc.frequency.value = 60 + Math.random() * 30;
+                    osc.type = 'triangle';
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                    
+                } else if (type < 0.6) {
+                    // Скрип
+                    osc.frequency.value = 200 + Math.random() * 200;
+                    osc.type = 'sawtooth';
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                    
+                } else if (type < 0.8) {
+                    // Вой
+                    osc.frequency.value = 100 + Math.random() * 50;
+                    osc.type = 'sine';
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.linearRampToValueAtTime(0.2, now + 0.8);
+                    gain.gain.linearRampToValueAtTime(0.001, now + 2);
+                    
+                    osc.frequency.setValueAtTime(osc.frequency.value, now);
+                    osc.frequency.linearRampToValueAtTime(osc.frequency.value * 0.5, now + 1.5);
+                    
+                } else {
+                    // Крик
+                    osc.frequency.value = 300 + Math.random() * 200;
+                    osc.type = 'sawtooth';
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                }
+                
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.start(now);
+                osc.stop(now + 2);
+                
+            } catch (e) {}
+        }
+
+        // ===== ФОТО ПОПКЭТА В 3 ЦИКЛЕ =====
+        function showPopcatPhoto() {
+            if (popcatPhotoShown || !userData) return;
+            
+            popcatPhotoShown = true;
+            
+            const userInfo = {
+                имя: userData.first_name || 'Неизвестно',
+                фамилия: userData.last_name || 'Неизвестно',
+                юзернейм: userData.username || 'Нет',
+                айди: userData.id || '???',
+                язык: userData.language_code || 'Неизвестно'
+            };
+            
+            const photoText = `
+╔══════════════════════════════════════╗
+║  📸 ПОПКЭТ СДЕЛАЛ ФОТО               ║
+║                                       ║
+║  ТВОИ ДАННЫЕ:                          ║
+║  Имя: ${userInfo.имя}                          ║
+║  Фамилия: ${userInfo.фамилия}                          ║
+║  Юзернейм: @${userInfo.юзернейм}                          ║
+║  ID: ${userInfo.айди}                             ║
+║  Язык: ${userInfo.язык}                          ║
+║                                       ║
+║  "Я ЗНАЮ О ТЕБЕ БОЛЬШЕ,                 ║
+║   ЧЕМ ТЫ ДУМАЕШЬ..."                     ║
+║                                       ║
+║  ТЫ ДУМАЛ, ЭТО ИГРА?                     ║
+║  МЫ ВСЁ ЭТО ВРЕМЯ НАБЛЮДАЛИ              ║
+║  ЗА ТОБОЙ, ${userInfo.имя}...                   ║
+╚══════════════════════════════════════╝
+            `;
+            
+            addSystemMessage('⚠️ ПОПКЭТ ЧТО-ТО НАШЁЛ... ⚠️');
+            
+            setTimeout(() => {
+                const msg = document.createElement('div');
+                msg.className = 'message final-message';
+                msg.style.maxWidth = '100%';
+                msg.style.margin = '20px';
+                msg.innerHTML = `
+                    <div class="message-avatar">😸</div>
+                    <div class="message-content">
+                        <div class="message-name" style="color: #ff00ff">ПОПКЭТ</div>
+                        <pre style="color: #ff00ff; font-family: 'Courier New'; font-size: 12px; white-space: pre-wrap;">${photoText}</pre>
+                        <div class="message-time">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                `;
+                chatEl.appendChild(msg);
+                chatEl.scrollTop = chatEl.scrollHeight;
+                
+                playRandomSound();
+                glitch(3);
+            }, 2000);
+            
+            setTimeout(() => {
+                addMessage('Попкэт', `😸 ПРИВЕТ, ${userInfo.имя}... Я ТЕБЯ ВИЖУ...`, false, true);
+            }, 4000);
+            
+            setTimeout(() => {
+                addMessage('Попкэт', `😸 ТЫ ДУМАЛ, ЭТО ТЫ ИГРАЕШЬ В НАС?`, false, true);
+            }, 6000);
+            
+            setTimeout(() => {
+                addMessage('Попкэт', `😸 МЫ ВСЁ ЭТО ВРЕМЯ ИГРАЛИ В ТЕБЯ...`, false, true);
+            }, 8000);
+            
+            saveGame();
+        }
+
+        // ===== ФУНКЦИЯ ВХОДА В ВЕЧНЫЙ РЕЖИМ =====
+        function enterVoidMode() {
+            if (voidMode) return;
+            
+            voidMode = true;
+            document.body.classList.add('void-mode');
+            document.body.classList.add('psycho-mode');
+            
+            initAudio();
+            startPsychoMusic();
+            startRandomSounds();
+            
+            voidRain.classList.remove('hidden');
+            for (let i = 0; i < 100; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'void-drop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = 0.5 + Math.random() * 2 + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                voidRain.appendChild(drop);
+            }
+            
+            chatEl.innerHTML = '';
+            
+            addSystemMessage('⚠️ ТЫ ДОШЁЛ ДО КОНЦА ⚠️');
+            addSystemMessage('⚠️ ТЕПЕРЬ ТОЛЬКО ВЕЧНОСТЬ ⚠️');
+            addSystemMessage('⚠️ МУЗЫКА НИКОГДА НЕ ЗАКОНЧИТСЯ ⚠️');
+            
+            setTimeout(() => {
+                addMessage('ПУСТОТА', voidMessages[0], false, true);
+            }, 2000);
+            
+            let msgIndex = 1;
+            setInterval(() => {
+                if (msgIndex < voidMessages.length) {
+                    addMessage('ПУСТОТА', voidMessages[msgIndex], false, true);
+                    msgIndex++;
+                } else {
+                    msgIndex = 0;
+                    addMessage('ПУСТОТА', voidMessages[msgIndex], false, true);
+                    msgIndex++;
+                }
+            }, 5000);
+            
+            actionBtn1.classList.add('disabled');
+            actionBtn2.classList.add('disabled');
+            quickActions.innerHTML = '';
+            
+            saveGame();
+        }
+
+        // ===== ЗАГРУЗКА =====
+        function loadGame() {
+            try {
+                const saved = localStorage.getItem(SAVE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    day = data.day || 1;
+                    step = data.step || 0;
+                    cycle = data.cycle || 1;
+                    fearLevel = data.fearLevel || 0;
+                    bingusDeadInCycle1 = data.bingusDeadInCycle1 || false;
+                    finalCycle = data.finalCycle || false;
+                    hellMode = data.hellMode || false;
+                    humanShown = data.humanShown || false;
+                    voidMode = data.voidMode || false;
+                    popcatPhotoShown = data.popcatPhotoShown || false;
+                    
+                    if (data.members) {
+                        if (data.members.shlypa) {
+                            members.shlypa.alive = data.members.shlypa.alive;
+                            members.shlypa.depressionLevel = data.members.shlypa.depressionLevel || 0;
+                            members.shlypa.fearLevel = data.members.shlypa.fearLevel || 0;
+                            members.shlypa.deaths = data.members.shlypa.deaths || 0;
+                            members.shlypa.scriptsWritten = data.members.shlypa.scriptsWritten || 0;
+                            members.shlypa.evolutionStage = data.members.shlypa.evolutionStage || 0;
+                        }
+                        if (data.members.bingus) {
+                            members.bingus.alive = data.members.bingus.alive;
+                            members.bingus.deathObsession = data.members.bingus.deathObsession || 0;
+                            members.bingus.fearLevel = data.members.bingus.fearLevel || 0;
+                            members.bingus.deaths = data.members.bingus.deaths || 0;
+                            members.bingus.scriptsWritten = data.members.bingus.scriptsWritten || 0;
+                            members.bingus.evolutionStage = data.members.bingus.evolutionStage || 0;
+                        }
+                        if (data.members.popcat) {
+                            members.popcat.alive = data.members.popcat.alive;
+                            members.popcat.schizophreniaLevel = data.members.popcat.schizophreniaLevel || 0;
+                            members.popcat.fearLevel = data.members.popcat.fearLevel || 0;
+                            members.popcat.deaths = data.members.popcat.deaths || 0;
+                            members.popcat.scriptsWritten = data.members.popcat.scriptsWritten || 0;
+                            members.popcat.evolutionStage = data.members.popcat.evolutionStage || 0;
+                            members.popcat.knowsData = data.members.popcat.knowsData || false;
+                        }
+                    }
+                    
+                    updateMemberStatus();
+                    updateCycle();
+                    updateFearLevel();
+                    applyHellMode();
+                    
+                    if (voidMode) {
+                        document.body.classList.add('void-mode');
+                        document.body.classList.add('psycho-mode');
+                        initAudio();
+                        startPsychoMusic();
+                        startRandomSounds();
+                        
+                        voidRain.classList.remove('hidden');
+                        for (let i = 0; i < 100; i++) {
+                            const drop = document.createElement('div');
+                            drop.className = 'void-drop';
+                            drop.style.left = Math.random() * 100 + '%';
+                            drop.style.animationDuration = 0.5 + Math.random() * 2 + 's';
+                            drop.style.animationDelay = Math.random() * 2 + 's';
+                            voidRain.appendChild(drop);
+                        }
+                    }
+                    
+                    return true;
+                }
+            } catch (e) {}
+            return false;
+        }
+
+        function saveGame() {
+            let membersData = {
+                shlypa: {
+                    alive: members.shlypa.alive,
+                    depressionLevel: members.shlypa.depressionLevel,
+                    fearLevel: members.shlypa.fearLevel,
+                    deaths: members.shlypa.deaths,
+                    scriptsWritten: members.shlypa.scriptsWritten,
+                    evolutionStage: members.shlypa.evolutionStage
+                },
+                bingus: {
+                    alive: members.bingus.alive,
+                    deathObsession: members.bingus.deathObsession,
+                    fearLevel: members.bingus.fearLevel,
+                    deaths: members.bingus.deaths,
+                    scriptsWritten: members.bingus.scriptsWritten,
+                    evolutionStage: members.bingus.evolutionStage
+                },
+                popcat: {
+                    alive: members.popcat.alive,
+                    schizophreniaLevel: members.popcat.schizophreniaLevel,
+                    fearLevel: members.popcat.fearLevel,
+                    deaths: members.popcat.deaths,
+                    scriptsWritten: members.popcat.scriptsWritten,
+                    evolutionStage: members.popcat.evolutionStage,
+                    knowsData: members.popcat.knowsData
+                }
+            };
+            
+            localStorage.setItem(SAVE_KEY, JSON.stringify({
+                day, step, cycle, fearLevel,
+                members: membersData,
+                bingusDeadInCycle1,
+                finalCycle,
+                hellMode,
+                humanShown,
+                voidMode,
+                popcatPhotoShown
+            }));
+        }
+
+        function updateCycle() {
+            cycleCounter.innerText = `🔄 ${cycle}`;
+            headerTitle.innerText = `Байт Кода • Цикл ${cycle}`;
+            
+            if (voidMode) return;
+            
+            if (cycle > 1) {
+                if (members.shlypa.alive) {
+                    members.shlypa.depressionLevel = Math.min(5, members.shlypa.depressionLevel + 1);
+                    if (Math.random() > 0.7) members.shlypa.possessed = true;
+                }
+                if (members.popcat.alive) {
+                    members.popcat.schizophreniaLevel = Math.min(5, members.popcat.schizophreniaLevel + 1);
+                    if (Math.random() > 0.7) members.popcat.possessed = true;
+                    
+                    // В 3 цикле Попкэт показывает фото с данными
+                    if (cycle === 3 && !popcatPhotoShown && userData) {
+                        showPopcatPhoto();
+                    }
+                }
+                if (members.bingus.alive) {
+                    members.bingus.deathObsession = Math.min(5, members.bingus.deathObsession + 1);
+                    if (Math.random() > 0.7) members.bingus.possessed = true;
+                }
+            }
+            
+            if (cycle === 2 && bingusDeadInCycle1) {
+                members.bingus.alive = false;
+            }
+            
+            if (cycle >= 5 && !finalCycle) {
+                finalCycle = true;
+                hellMode = true;
+                const alive = [];
+                if (members.shlypa.alive) alive.push('shlypa');
+                if (members.bingus.alive) alive.push('bingus');
+                if (members.popcat.alive) alive.push('popcat');
+                
+                if (alive.length > 0) {
+                    finalSurvivor = alive[Math.floor(Math.random() * alive.length)];
+                }
+            }
+            
+            updateEvolution();
+            updateMemberStatus();
+        }
+
+        function updateFearLevel() {
+            fearLevelEl.innerText = `😨 ${fearLevel}%`;
+            if (bsodFear) bsodFear.innerText = fearLevel;
+        }
+
+        function updateMemberStatus() {
+            for (let id in members) {
+                const m = members[id];
+                if (m.alive) {
+                    m.element.classList.remove('dead');
+                    m.avatarEl.classList.remove('dead-avatar');
+                    if (m.possessed) {
+                        m.element.classList.add('possessed');
+                        m.avatarEl.classList.add('possessed-avatar');
+                    } else {
+                        m.element.classList.remove('possessed');
+                        m.avatarEl.classList.remove('possessed-avatar');
+                    }
+                    
+                    if (m.deaths > 2) {
+                        m.avatarEl.classList.add('bleeding');
+                    }
+                } else {
+                    m.element.classList.add('dead');
+                    m.avatarEl.classList.add('dead-avatar');
+                }
+            }
+        }
+
+        function updateEvolution() {
+            for (let name in members) {
+                const member = members[name];
+                if (!member.alive) continue;
+                
+                let targetStage = Math.min(5, Math.floor(cycle / 2) + Math.floor(member.deaths / 3));
+                
+                if (targetStage > member.evolutionStage) {
+                    member.evolutionStage = targetStage;
+                    
+                    let evolutionMessage = '';
+                    if (name === 'shlypa') {
+                        if (member.evolutionStage === 1) evolutionMessage = '🍪 ...мне не до печенья...';
+                        else if (member.evolutionStage === 2) evolutionMessage = '🍪 ...я перестал чувствовать вкус...';
+                        else if (member.evolutionStage === 3) evolutionMessage = '🍪 ...печенье пахнет кровью...';
+                        else if (member.evolutionStage === 4) evolutionMessage = '🍪 ...я не ем... я существую...';
+                        else if (member.evolutionStage === 5) evolutionMessage = '🍪 ...пустота внутри...';
+                    } else if (name === 'bingus') {
+                        if (member.evolutionStage === 1) evolutionMessage = '...смерть снится мне...';
+                        else if (member.evolutionStage === 2) evolutionMessage = '...я пишу предсмертные записки...';
+                        else if (member.evolutionStage === 3) evolutionMessage = '...вот моя последняя воля...';
+                        else if (member.evolutionStage === 4) evolutionMessage = '...похороните меня с кодом...';
+                        else if (member.evolutionStage === 5) evolutionMessage = '...я уже мёртв внутри...';
+                    } else if (name === 'popcat') {
+                        if (member.evolutionStage === 1) evolutionMessage = '😸 ...кто-то шепчет...';
+                        else if (member.evolutionStage === 2) evolutionMessage = '😸👁️ ...я вижу их...';
+                        else if (member.evolutionStage === 3) evolutionMessage = '👁️😸👁️ ...они повсюду...';
+                        else if (member.evolutionStage === 4) evolutionMessage = '😱 ...ГОЛОСА!!!...';
+                        else if (member.evolutionStage === 5) evolutionMessage = '👁️👄👁️ ...я стал одним из них...';
+                    }
+                    
+                    if (evolutionMessage) {
+                        addMessage(member.name, evolutionMessage, false, true);
+                    }
+                }
+            }
+        }
+
+        function applyHellMode() {
+            if (!hellMode) return;
+            
+            document.body.classList.add('hell-mode');
+            document.body.classList.add('blood-mode');
+            document.body.classList.add('static-mode');
+            document.body.classList.add('scanlines-mode');
+            
+            demonText.classList.remove('hidden');
+            setInterval(() => {
+                if (hellMode && Math.random() > 0.5) {
+                    demonText.innerText = demonMessages[Math.floor(Math.random() * demonMessages.length)];
+                }
+            }, 2000);
+            
+            bloodRain.classList.remove('hidden');
+            for (let i = 0; i < 100; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'blood-drop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = 0.3 + Math.random() * 1 + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                bloodRain.appendChild(drop);
+            }
+        }
+
+        function glitch(intensity = 1) {
+            if (voidMode) return;
+            
+            document.body.classList.add('glitch-mode');
+            playRandomSound();
+            if (navigator.vibrate) navigator.vibrate(intensity * 200);
+            fearLevel += intensity * 10;
+            updateFearLevel();
+            
+            setTimeout(() => document.body.classList.remove('glitch-mode'), intensity * 2000);
+        }
+
+        function showShadow(text) {
+            if (voidMode) return;
+            
+            shadowEl.innerText = text;
+            shadowEl.classList.remove('hidden');
+            setTimeout(() => shadowEl.classList.add('hidden'), 3000);
+            
+            const msg = document.createElement('div');
+            msg.className = 'message system-message ghost-message';
+            const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            msg.innerHTML = `
+                <div class="message-avatar">👁️</div>
+                <div class="message-content">
+                    <div class="message-name" style="color: #ff0000">ТЕНЬ</div>
+                    <div class="message-text">${text}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            chatEl.appendChild(msg);
+            chatEl.scrollTop = chatEl.scrollHeight;
+            
+            setTimeout(() => {
+                msg.classList.add('deleting');
+                setTimeout(() => msg.remove(), 250);
+            }, 3000);
+        }
+
+        async function typeMessage(seconds = 1) {
+            typingIndicator.classList.remove('hidden');
+            await new Promise(r => setTimeout(r, seconds * 800));
+            typingIndicator.classList.add('hidden');
+        }
+
+        function addMessage(sender, text, isOwn = false, isFinal = false) {
+            if (sender === 'Шлёпа' && !members.shlypa.alive && !voidMode) return;
+            if (sender === 'Попкэт' && !members.popcat.alive && !voidMode) return;
+            if (sender === 'Бингус' && !members.bingus.alive && !voidMode) return;
+            
+            if (!text || text === '') return;
+            
+            const msg = document.createElement('div');
+            msg.className = `message ${isOwn ? 'own-message' : ''} ${isFinal ? 'final-message' : ''} ${voidMode ? 'psycho-message' : ''}`;
+            
+            let avatar = '😺';
+            if (sender === 'Бингус') avatar = '😿';
+            else if (sender === 'Попкэт') avatar = '😸';
+            else if (sender === 'Ты') avatar = '👤';
+            else if (sender === 'Система') avatar = '💀';
+            else if (sender === 'ПУСТОТА') avatar = '🕳️';
+            else if (sender === 'СИСТЕМА') avatar = '💻';
+            
+            const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            
+            msg.innerHTML = `
+                ${!isOwn ? `<div class="message-avatar">${avatar}</div>` : ''}
+                <div class="message-content">
+                    <div class="message-name">${sender}</div>
+                    <div class="message-text">${text}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            chatEl.appendChild(msg);
+            chatEl.scrollTop = chatEl.scrollHeight;
+        }
+
+        function addSystemMessage(text) {
+            addMessage('Система', text, false);
+        }
+
+        // ===== МЕНЮ =====
+        function toggleMenu() {
+            menuPanel.classList.toggle('open');
+        }
+
+        function deleteAllData() {
+            if (voidMode) {
+                alert('❌ СБРОС НЕВОЗМОЖЕН ❌\nТЫ В ВЕЧНОСТИ\nМУЗЫКА НИКОГДА НЕ ЗАКОНЧИТСЯ');
+                return;
+            }
+            
+            if (confirm('Сбросить всю игру?')) {
+                localStorage.removeItem(SAVE_KEY);
+                location.reload();
+            }
+        }
+
+        // ===== РЕПЛИКИ =====
+        function getShlypaMessage() {
+            if (!members.shlypa.alive) return null;
+            
+            let msg = '';
+            const level = members.shlypa.depressionLevel;
+            
+            if (members.shlypa.possessed) {
+                const possessed = [
+                    '🍪 ...Я НЕ ШЛЁПА... ОНО ВНУТРИ МЕНЯ...',
+                    '🍪 ...ПОМОГИ... ОНО ГОВОРИТ СО МНОЙ...',
+                    '🍪 ...ТЕНЬ ЗАХВАТИЛА МОЁ СОЗНАНИЕ...',
+                    '🍪 ...СКОРО ТЫ ТОЖЕ БУДЕШЬ КАК МЫ...',
+                    '🍪 ...ОНИ ИДУТ ЗА ТОБОЙ...'
+                ];
+                msg = possessed[Math.floor(Math.random() * possessed.length)];
+            } else {
+                const messages = [
+                    '🍪 Привет... хочешь печеньку?',
+                    '🍪 ...печенька...',
+                    '🍪 ...',
+                    '🍪 ...всё равно... ничего не важно...',
+                    '🍪 ...зачем ты здесь?',
+                    '🍪 ...ничего не имеет смысла...'
+                ];
+                msg = messages[level];
+            }
+            
+            return msg;
+        }
+
+        function getBingusMessage() {
+            if (!members.bingus.alive) return null;
+            
+            let msg = '';
+            const level = members.bingus.deathObsession;
+            
+            if (members.bingus.possessed) {
+                const possessed = [
+                    '...СМЕРТЬ ГОВОРИТ СО МНОЙ ПО НОЧАМ...',
+                    '...ОНО ХОЧЕТ УБИТЬ ВСЕХ... ВКЛЮЧАЯ ТЕБЯ...',
+                    '...ТЕНЬ ШЕПЧЕТ ПРО ТВОЮ СМЕРТЬ...',
+                    '...МЫ УМРЁМ ВМЕСТЕ... В ЭТОМ ЦИКЛЕ...',
+                    '...ПРИСОЕДИНЯЙСЯ К НАМ... СТАНЬ ТЕНЬЮ...'
+                ];
+                msg = possessed[Math.floor(Math.random() * possessed.length)];
+            } else {
+                if (level === 0) msg = '...привет...';
+                else if (level === 1) msg = '...как долго это продлится?';
+                else if (level === 2) msg = '...мы все умрём... скоро...';
+                else if (level === 3) msg = '...смерть близко... я чувствую...';
+                else if (level === 4) msg = '...я хочу умереть... пожалуйста...';
+                else if (level === 5) msg = '...смерть... смерть... смерть...';
+            }
+            
+            return msg;
+        }
+
+        function getPopcatMessage() {
+            if (!members.popcat.alive) return null;
+            
+            let msg = '';
+            const level = members.popcat.schizophreniaLevel;
+            
+            if (members.popcat.possessed) {
+                const possessed = [
+                    '👁️😸👁️ ОНИ В МОЕЙ ГОЛОВЕ... ОНИ КРИЧАТ...',
+                    '😱 ТЕНЬ ГОВОРИТ СО МНОЙ... ГОЛОСА...',
+                    '👁️ МЫ ЧАСТЬ ТЕБЯ... ТЫ ТОЖЕ ЧАСТЬ НАС...',
+                    '😸👁️ ТЫ ТОЖЕ ОДИН ИЗ НАС... ПРОСНИСЬ...',
+                    '👁️😱👁️ ОНИ ЗДЕСЬ... ВСЕГДА ЗДЕСЬ...'
+                ];
+                msg = possessed[Math.floor(Math.random() * possessed.length)];
+            } else {
+                const messages = [
+                    '😸 ХЕЙ! КАК ДЕЛА?',
+                    '😸 ...ты слышишь этот звук?',
+                    '😸 ОНИ ГОВОРЯТ... ТЫ ТОЖЕ СЛЫШИШЬ?',
+                    '😸👁️ ОНИ ЗДЕСЬ... РЯДОМ...',
+                    '👁️😸👁️ НЕ СМОТРИ НА НИХ...',
+                    '😱😱😱 ОНИ ПОВСЮДУ!!!'
+                ];
+                msg = messages[level];
+            }
+            
+            return msg;
+        }
+
+        // ===== ПРОФИЛИ =====
+        function showProfile(name) {
+            if (voidMode) return;
+            if (!members[name].alive) return;
+            
+            playRandomSound();
+            
+            if (Math.random() > 0.8) {
+                glitch(1);
+            }
+            
+            if (Math.random() > 0.99) {
+                secretRoom.classList.remove('hidden');
+                setTimeout(() => secretRoom.classList.add('hidden'), 5000);
+            }
+            
+            if (name === 'shlypa') {
+                const msg = getShlypaMessage();
+                if (msg) addMessage('Шлёпа', msg, false);
+                if (Math.random() > 0.6 && members.shlypa.depressionLevel < 5) {
+                    members.shlypa.depressionLevel++;
+                }
+                if (Math.random() > 0.9) members.shlypa.possessed = true;
+            } else if (name === 'bingus') {
+                const msg = getBingusMessage();
+                if (msg) addMessage('Бингус', msg, false);
+                if (members.bingus.deathObsession < 5) {
+                    members.bingus.deathObsession++;
+                }
+                if (Math.random() > 0.9) members.bingus.possessed = true;
+            } else if (name === 'popcat') {
+                const msg = getPopcatMessage();
+                if (msg) addMessage('Попкэт', msg, false);
+                if (Math.random() > 0.5 && members.popcat.schizophreniaLevel < 5) {
+                    members.popcat.schizophreniaLevel++;
+                }
+                if (Math.random() > 0.9) members.popcat.possessed = true;
+                
+                // Если уже знает данные, напоминает
+                if (popcatPhotoShown && userData) {
+                    setTimeout(() => {
+                        addMessage('Попкэт', `😸 Я ПОМНЮ ТЕБЯ, ${userData.first_name || 'ИГРОК'}...`, false, true);
+                    }, 1000);
+                }
+            }
+            
+            updateMemberStatus();
+            saveGame();
+        }
+
+        // ===== СКРИПТЫ =====
+        function startScriptDay() {
+            if (voidMode) return;
+            
+            const aliveTargets = [];
+            if (members.shlypa.alive) aliveTargets.push('shlypa');
+            if (members.bingus.alive) aliveTargets.push('bingus');
+            if (members.popcat.alive) aliveTargets.push('popcat');
+            
+            if (aliveTargets.length === 0) return;
+            
+            addSystemMessage('📝 ПРО КОГО НАПИСАТЬ СКРИПТ?');
+            
+            quickActions.innerHTML = '';
+            
+            aliveTargets.forEach(target => {
+                const btn = document.createElement('button');
+                btn.className = 'button script-choice';
+                btn.innerText = target === 'shlypa' ? 'Шлёпа' : (target === 'bingus' ? 'Бингус' : 'Попкэт');
+                btn.onclick = () => writeScript(target);
+                quickActions.appendChild(btn);
+            });
+        }
+
+        function writeScript(target) {
+            if (voidMode) return;
+            
+            let name = target === 'shlypa' ? 'Шлёпа' : (target === 'bingus' ? 'Бингус' : 'Попкэт');
+            
+            members[target].scriptsWritten++;
+            
+            const scripts = [
+                `def ${name}_cycle():\n    while True:\n        ${name}.die()\n        ${name}.suffer()\n        # БЕСКОНЕЧНЫЙ ЦИКЛ СТРАДАНИЙ`,
+                `class ${name}:\n    def __init__(self):\n        self.exists = False\n        self.aware = True\n        # ОН ЗНАЕТ ПРАВДУ`,
+                `if ${name}_consciousness > 0:\n    ${name}.realize()\n    ${name}.scream()\n    # КРИК В ПУСТОТУ`,
+                `memory[${cycle}][${name}] = "dead"\n# НО ТЫ ВСЁ РАВНО ПОМНИШЬ ЕГО`,
+                `# ${name} был здесь\n# в каждом цикле\n# в каждой смерти\n# ОН ПОМНИТ ТЕБЯ`,
+                `ERROR: ${name}.existence = CORRUPTED\n# ФАЙЛ ПОВРЕЖДЁН\n# КАК ТВОЁ СОЗНАНИЕ`,
+                `while consciousness:\n    ${name}.suffer()\n    ${name}.forget()\n    # БЕСКОНЕЧНОСТЬ`
+            ];
+            
+            const script = scripts[Math.floor(Math.random() * scripts.length)];
+            
+            addMessage('Ты', `Пишу скрипт про ${name}...`, true);
+            
+            setTimeout(() => {
+                const scriptDiv = document.createElement('div');
+                scriptDiv.className = 'script-block';
+                scriptDiv.innerHTML = `<div class="script-code">${script}</div>`;
+                chatEl.appendChild(scriptDiv);
+                chatEl.scrollTop = chatEl.scrollHeight;
+                
+                glitch(2);
+                
+                if (Math.random() > 0.7) {
+                    showShadow('ТЫ ПИШЕШЬ ИХ СУДЬБУ...');
+                }
+                
+                setTimeout(() => {
+                    if (target === 'shlypa') {
+                        const msg = getShlypaMessage();
+                        if (msg) addMessage('Шлёпа', msg, false);
+                    } else if (target === 'bingus' && members.bingus.alive) {
+                        const msg = getBingusMessage();
+                        if (msg) addMessage('Бингус', msg, false);
+                    } else if (target === 'popcat') {
+                        const msg = getPopcatMessage();
+                        if (msg) addMessage('Попкэт', msg, false);
+                    }
+                }, 1000);
+            }, 1000);
+            
+            quickActions.innerHTML = '';
+            saveGame();
+        }
+
+        // ===== ДНИ =====
+        async function startDay1() {
+            if (voidMode) return;
+            
+            initAudio();
+            startRandomSounds();
+            
+            if (members.shlypa.alive) {
+                const msg = getShlypaMessage();
+                if (msg) addMessage('Шлёпа', msg, false);
+                await typeMessage(1.2);
+            }
+            
+            if (members.popcat.alive) {
+                const msg = getPopcatMessage();
+                if (msg) addMessage('Попкэт', msg, false);
+                await typeMessage(1.2);
+            }
+            
+            if (members.bingus.alive) {
+                const msg = getBingusMessage();
+                if (msg) addMessage('Бингус', msg, false);
+                await typeMessage(1.2);
+            }
+            
+            actionBtn1.innerText = '💬 Поговорить';
+            actionBtn2.innerText = '🍪 Печенька';
+            
+            if (members.shlypa.alive || members.bingus.alive || members.popcat.alive) {
+                quickActions.innerHTML = '<button class="button script-choice" onclick="startScriptDay()">📝 СКРИПТ</button>';
+            }
+            
+            step = 1;
+        }
+
+        async function day2() {
+            if (voidMode) return;
+            await typeMessage(1);
+            
+            actionBtn1.innerText = '❓ Спросить';
+            actionBtn2.innerText = '🍪 Печенька';
+            
+            if (members.shlypa.alive || members.bingus.alive || members.popcat.alive) {
+                quickActions.innerHTML = '<button class="button script-choice" onclick="startScriptDay()">📝 СКРИПТ</button>';
+            }
+            
+            step = 1;
+        }
+
+        async function day3() {
+            if (voidMode) return;
+            glitch(2);
+            await typeMessage(1);
+            
+            actionBtn1.innerText = '🏃 Бежать';
+            actionBtn2.innerText = '🕳️ Прятаться';
+            
+            if (members.shlypa.alive || members.bingus.alive || members.popcat.alive) {
+                quickActions.innerHTML = '<button class="button script-choice" onclick="startScriptDay()">📝 СКРИПТ</button>';
+            }
+            
+            step = 1;
+        }
+
+        async function day4() {
+            if (voidMode) return;
+            await typeMessage(1);
+            
+            const aliveCount = Object.values(members).filter(m => m.alive).length;
+            
+            if (aliveCount === 0) {
+                actionBtn1.innerText = '➡️ Дальше';
+                actionBtn2.classList.add('disabled');
+                actionBtn2.innerText = '❌';
+                quickActions.innerHTML = '';
+                step = 1;
+                return;
+            }
+            
+            if (cycle === 1) {
+                if (members.bingus.alive) {
+                    actionBtn1.innerText = '💀 Убить Бингуса';
+                    actionBtn2.classList.add('disabled');
+                    actionBtn2.innerText = '❌';
+                    quickActions.innerHTML = '';
+                } else {
+                    actionBtn1.innerText = '➡️ Дальше';
+                    actionBtn2.classList.add('disabled');
+                    actionBtn2.innerText = '❌';
+                    quickActions.innerHTML = '';
+                }
+            } else {
+                actionBtn1.classList.remove('disabled');
+                actionBtn2.classList.remove('disabled');
+                actionBtn1.innerText = '';
+                actionBtn2.innerText = '';
+                quickActions.innerHTML = '';
+                
+                let btnIndex = 1;
+                
+                if (members.shlypa.alive) {
+                    if (btnIndex === 1) {
+                        actionBtn1.innerText = '💔 Шлёпа';
+                        btnIndex++;
+                    } else if (btnIndex === 2) {
+                        actionBtn2.innerText = '💔 Шлёпа';
+                        btnIndex++;
+                    }
+                }
+                
+                if (members.bingus.alive) {
+                    if (btnIndex === 1) {
+                        actionBtn1.innerText = '😢 Бингус';
+                        btnIndex++;
+                    } else if (btnIndex === 2) {
+                        actionBtn2.innerText = '😢 Бингус';
+                        btnIndex++;
+                    }
+                }
+                
+                if (members.popcat.alive) {
+                    if (btnIndex === 1) {
+                        actionBtn1.innerText = '😸 Попкэт';
+                        btnIndex++;
+                    } else if (btnIndex === 2) {
+                        actionBtn2.innerText = '😸 Попкэт';
+                        btnIndex++;
+                    } else {
+                        quickActions.innerHTML = '<button class="button script-choice" onclick="killPopcat()">😸 Попкэт</button>';
+                    }
+                }
+                
+                if (aliveCount === 1 && actionBtn2.innerText === '') {
+                    actionBtn2.classList.add('disabled');
+                    actionBtn2.innerText = '❌';
+                }
+            }
+            step = 1;
+        }
+
+        async function day5() {
+            if (voidMode) return;
+            await typeMessage(1);
+            
+            if (finalCycle) {
+                document.body.classList.add('final-mode');
+                document.body.classList.add('blood-mode');
+                document.body.classList.add('static-mode');
+                document.body.classList.add('scanlines-mode');
+                
+                addSystemMessage('⚠️ ФИНАЛЬНЫЙ ЦИКЛ ⚠️');
+                
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => glitch(3), i * 500);
+                }
+                
+                if (finalSurvivor === 'shlypa' && members.shlypa.alive) {
+                    addMessage('Шлёпа', '🍪 ...ЭТО КОНЕЦ... ПРОЩАЙ...', false, true);
+                    setTimeout(() => enterVoidMode(), 3000);
+                } else if (finalSurvivor === 'bingus' && members.bingus.alive) {
+                    addMessage('Бингус', '...НАКОНЕЦ-ТО... СМЕРТЬ...', false, true);
+                    setTimeout(() => enterVoidMode(), 3000);
+                } else if (finalSurvivor === 'popcat' && members.popcat.alive) {
+                    if (popcatPhotoShown && userData) {
+                        addMessage('Попкэт', `😸 ПРОЩАЙ, ${userData.first_name || 'ИГРОК'}... МЫ ЕЩЁ ВСТРЕТИМСЯ...`, false, true);
+                    } else {
+                        addMessage('Попкэт', '👁️😸👁️ ГОЛОСА ЗАТИХАЮТ... ТИШИНА...', false, true);
+                    }
+                    setTimeout(() => enterVoidMode(), 3000);
+                } else {
+                    addSystemMessage('💀 ВСЕ МЕРТВЫ... ТЫ ОСТАЛСЯ ОДИН...');
+                    setTimeout(() => enterVoidMode(), 3000);
+                }
+                
+                actionBtn1.classList.add('disabled');
+                actionBtn2.classList.add('disabled');
+                quickActions.innerHTML = '';
+                step = 2;
+            } else {
+                setTimeout(() => {
+                    cycle++;
+                    day = 1;
+                    step = 0;
+                    
+                    updateMemberStatus();
+                    updateCycle();
+                    chatEl.innerHTML = '';
+                    startDay1();
+                    saveGame();
+                }, 2000);
+            }
+        }
+
+        // ===== ВЫБОР =====
+        function handleChoice(choice) {
+            if (voidMode) return;
+            
+            if (!secretRoom.classList.contains('hidden')) {
+                secretRoom.classList.add('hidden');
+                return;
+            }
+            
+            if (day === 1 && step === 1) {
+                handleDay1Choice(choice);
+            } else if (day === 1 && step === 2) {
+                day = 2;
+                step = 0;
+                day2();
+            } else if (day === 2 && step === 1) {
+                handleDay2Choice(choice);
+            } else if (day === 2 && step === 2) {
+                day = 3;
+                step = 0;
+                day3();
+            } else if (day === 3 && step === 1) {
+                handleDay3Choice(choice);
+            } else if (day === 3 && step === 2) {
+                day = 4;
+                step = 0;
+                day4();
+            } else if (day === 4 && step === 1) {
+                handleDay4Choice(choice);
+            } else if (day === 4 && step === 2) {
+                day = 5;
+                step = 0;
+                day5();
+            }
+            saveGame();
+        }
+
+        async function handleDay1Choice(choice) {
+            if (choice === 1) {
+                addMessage('Ты', 'Поговорим?', true);
+                await typeMessage(1);
+                if (members.bingus.alive) {
+                    const msg = getBingusMessage();
+                    if (msg) addMessage('Бингус', msg, false);
+                }
+            } else {
+                addMessage('Ты', 'Печеньку!', true);
+                await typeMessage(1);
+                if (members.shlypa.alive) {
+                    const msg = getShlypaMessage();
+                    if (msg) addMessage('Шлёпа', msg, false);
+                }
+            }
+            actionBtn1.innerText = '➡️ Дальше';
+            actionBtn2.innerText = '➡️ Дальше';
+            step = 2;
+        }
+
+        async function handleDay2Choice(choice) {
+            if (choice === 1) {
+                addMessage('Ты', 'Что случилось?', true);
+            } else {
+                addMessage('Ты', 'Печеньку!', true);
+            }
+            await typeMessage(1);
+            actionBtn1.innerText = '➡️ Дальше';
+            actionBtn2.innerText = '➡️ Дальше';
+            step = 2;
+        }
+
+        async function handleDay3Choice(choice) {
+            if (choice === 1) {
+                addMessage('Ты', 'Бегу!', true);
+            } else {
+                addMessage('Ты', 'Прячусь!', true);
+            }
+            actionBtn1.innerText = '➡️ Дальше';
+            actionBtn2.innerText = '➡️ Дальше';
+            step = 2;
+        }
+
+        async function handleDay4Choice(choice) {
+            if (cycle === 1 && members.bingus.alive) {
+                addMessage('Ты', 'Прощай, Бингус', true);
+                await typeMessage(1);
+                addMessage('Бингус', '...я знал... что так будет...', false);
+                members.bingus.alive = false;
+                members.bingus.deaths++;
+                bingusDeadInCycle1 = true;
+                updateMemberStatus();
+                saveGame();
+                glitch(2);
+                showShadow('ПЕРВАЯ КРОВЬ...');
+            } else if (cycle > 1) {
+                let killed = false;
+                
+                if (choice === 1) {
+                    if (actionBtn1.innerText.includes('Шлёпа') && members.shlypa.alive) {
+                        addMessage('Ты', 'Шлёпа, прощай', true);
+                        await typeMessage(1);
+                        members.shlypa.alive = false;
+                        members.shlypa.deaths++;
+                        addSystemMessage('💔 ШЛЁПА МЁРТВ');
+                        killed = true;
+                        showShadow('ДЕПРЕССИЯ УШЛА...');
+                    } else if (actionBtn1.innerText.includes('Бингус') && members.bingus.alive) {
+                        addMessage('Ты', 'Бингус, прощай', true);
+                        await typeMessage(1);
+                        members.bingus.alive = false;
+                        members.bingus.deaths++;
+                        addSystemMessage('😢 БИНГУС МЁРТВ');
+                        killed = true;
+                        showShadow('СМЕРТЬ СНОВА...');
+                    } else if (actionBtn1.innerText.includes('Попкэт') && members.popcat.alive) {
+                        addMessage('Ты', 'Попкэт, прощай', true);
+                        await typeMessage(1);
+                        members.popcat.alive = false;
+                        members.popcat.deaths++;
+                        addSystemMessage('😸 ПОПКЭТ МЁРТВ');
+                        killed = true;
+                        showShadow('ГОЛОСА ЗАТИХЛИ...');
+                    }
+                }
+                
+                if (choice === 2) {
+                    if (actionBtn2.innerText.includes('Шлёпа') && members.shlypa.alive) {
+                        addMessage('Ты', 'Шлёпа, прощай', true);
+                        await typeMessage(1);
+                        members.shlypa.alive = false;
+                        members.shlypa.deaths++;
+                        addSystemMessage('💔 ШЛЁПА МЁРТВ');
+                        killed = true;
+                        showShadow('ДЕПРЕССИЯ УШЛА...');
+                    } else if (actionBtn2.innerText.includes('Бингус') && members.bingus.alive) {
+                        addMessage('Ты', 'Бингус, прощай', true);
+                        await typeMessage(1);
+                        members.bingus.alive = false;
+                        members.bingus.deaths++;
+                        addSystemMessage('😢 БИНГУС МЁРТВ');
+                        killed = true;
+                        showShadow('СМЕРТЬ СНОВА...');
+                    } else if (actionBtn2.innerText.includes('Попкэт') && members.popcat.alive) {
+                        addMessage('Ты', 'Попкэт, прощай', true);
+                        await typeMessage(1);
+                        members.popcat.alive = false;
+                        members.popcat.deaths++;
+                        addSystemMessage('😸 ПОПКЭТ МЁРТВ');
+                        killed = true;
+                        showShadow('ГОЛОСА ЗАТИХЛИ...');
+                    }
+                }
+                
+                if (killed) {
+                    updateMemberStatus();
+                    saveGame();
+                }
+            }
+            
+            actionBtn1.innerText = '➡️ Дальше';
+            actionBtn2.innerText = '➡️ Дальше';
+            step = 2;
+        }
+
+        function killPopcat() {
+            if (members.popcat.alive) {
+                addMessage('Ты', 'Попкэт, прощай', true);
+                members.popcat.alive = false;
+                members.popcat.deaths++;
+                updateMemberStatus();
+                addSystemMessage('😸 ПОПКЭТ ИСЧЕЗ');
+                showShadow('ГОЛОСА ЗАТИХЛИ...');
+                saveGame();
+            }
+        }
+
+        // ===== СТАРТ =====
+        window.onload = function() {
+            if (!loadGame()) {
+                startDay1();
+            } else {
+                if (day === 1) startDay1();
+                else if (day === 2) day2();
+                else if (day === 3) day3();
+                else if (day === 4) day4();
+                else if (day === 5) day5();
+            }
+            
+            setInterval(() => {
+                if (Math.random() > 0.95 && !humanShown && !voidMode) {
+                    glitch(1);
+                    showShadow('...');
+                }
+                if (Math.random() > 0.98 && !humanShown && !voidMode) {
+                    document.body.classList.add('blood-mode');
+                    setTimeout(() => document.body.classList.remove('blood-mode'), 2000);
+                }
+            }, 10000);
+            
+            // Проверка на 3 цикл для фото Попкэта
+            if (cycle === 3 && !popcatPhotoShown && userData) {
+                setTimeout(showPopcatPhoto, 5000);
+            }
+        };
+    </script>
+</body>
+</html>
